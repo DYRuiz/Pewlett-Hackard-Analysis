@@ -131,3 +131,15 @@ SELECT d.emp_no,
 INTO sales_mkt_dept
 FROM dept_info as d
 WHERE d.dept_name IN ('Sales', 'Marketing');
+
+-- Mentorship Summary Stats
+SELECT COUNT(de.dept_no),
+	d.dept_name
+INTO mentorship_summary
+FROM mentorship_eligibility as me
+INNER JOIN dept_emp as de 
+ON (me.emp_no=de.emp_no)
+INNER JOIN departments as d
+ON (de.dept_no=d.dept_no)
+GROUP BY de.dept_no, d.dept_name
+ORDER BY COUNT(de.dept_no) DESC;
